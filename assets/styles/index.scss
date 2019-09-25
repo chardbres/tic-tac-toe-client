@@ -1,1 +1,43 @@
 @import '~bootstrap/scss/bootstrap';
+
+
+$bright-red: #ff0000;
+$black: #000000;
+$white: #FFFFFF;
+$banner-height: 5vh;
+$gameboard-height: 80vh;
+$gameboard-width: $gameboard-height;
+
+.banner {
+  background-color: $black;
+  height: $banner-height;
+}
+
+.game-board {
+  align-self: center;
+  border: 1px solid $bright-red;
+  display: flex;
+  height: $gameboard-height;
+  justify-content: center;
+  margin: $banner-height auto;
+  width: $gameboard-width;
+}
+
+.container {
+  align-self: center;
+  border: 1px solid $black;
+  height: 90%;
+  width: 90%;
+}
+
+.row {
+  height: 33.33333%;
+}
+
+.box {
+  align-items: center;
+  border: 3px solid $white;
+  display: flex;
+  justify-content: center;
+  background-color: $secondary;
+}
