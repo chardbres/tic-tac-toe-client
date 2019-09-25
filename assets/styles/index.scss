@@ -15,7 +15,9 @@ $gameboard-width: $gameboard-height;
 
 .game-board {
   align-self: center;
-  border: 1px solid $bright-red;
+  //border: 1px solid $bright-red;
+  background-color: #9EFFE6;
+  border-radius: 50px;
   display: flex;
   height: $gameboard-height;
   justify-content: center;
@@ -36,8 +38,24 @@ $gameboard-width: $gameboard-height;
 
 .box {
   align-items: center;
-  border: 3px solid $white;
+  background-color: $secondary;
+  border: 4px solid #9EFFE6;
   display: flex;
   justify-content: center;
-  background-color: $secondary;
+}
+
+.one {
+  border-top-left-radius: 30px;
+}
+
+.three {
+  border-top-right-radius: 30px;
+}
+
+.seven {
+  border-bottom-left-radius: 30px;
+}
+
+.nine {
+  border-bottom-right-radius: 30px;
 }
