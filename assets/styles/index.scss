@@ -7,6 +7,8 @@ $white: #FFFFFF;
 $banner-height: 5vh;
 $gameboard-height: 80vh;
 $gameboard-width: $gameboard-height;
+$gameboard-color: #9EFFE6;
+$cell-color: #FEFAF7;
 
 .banner {
   background-color: $black;
@@ -16,7 +18,7 @@ $gameboard-width: $gameboard-height;
 .game-board {
   align-self: center;
   //border: 1px solid $bright-red;
-  background-color: #9EFFE6;
+  background-color: $gameboard-color;
   border-radius: 50px;
   display: flex;
   height: $gameboard-height;
@@ -27,7 +29,7 @@ $gameboard-width: $gameboard-height;
 
 .container {
   align-self: center;
-  border: 1px solid $black;
+  //border: 1px solid $black;
   height: 90%;
   width: 90%;
 }
@@ -38,10 +40,14 @@ $gameboard-width: $gameboard-height;
 
 .box {
   align-items: center;
-  background-color: $secondary;
-  border: 4px solid #9EFFE6;
+  background-color: $cell-color;
+  border: 4px solid $gameboard-color;
   display: flex;
   justify-content: center;
+}
+
+.failure {
+  color: red;
 }
 
 .one {
@@ -58,4 +64,8 @@ $gameboard-width: $gameboard-height;
 
 .nine {
   border-bottom-right-radius: 30px;
+}
+
+.success {
+ color: green;
 }
