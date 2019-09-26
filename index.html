@@ -13,14 +13,30 @@
     </head>
     <body>
       <header class="banner">
-
-        <form id="sign-up">
+        <h2 id="message"></h2>
+        <!-- Sign-up form -->
+        <form class="sign-up">
           <input type="text" name="credentials[email]" placeholder="Enter e-mail" />
           <input type="password" name="credentials[password]" placeholder="Enter password"  />
           <input type="password" name="credentials[password_confirmation]" placeholder="Re-enter password"  />
-          <button type="submit">Submit</button>
+          <button type="submit">Sign Up!</button>
+        </form>
+        <!--Sign-in form -->
+        <form class="sign-in">
+          <input type="text" name="credentials[email]" placeholder="Enter e-mail" />
+          <input type="password" name="credentials[password]" placeholder="Enter password"  />
+          <button type="submit">Sign In!</button>
+        </form>
+        <!-- Password change form -->
+        <form class="change-password">
+          <input type="password" name="passwords[old]" placeholder="Enter old password..."  />
+          <input type="password" name="passwords[new]" placeholder="Enter new password..."  />
+          <button type="submit">Change Password</button>
         </form>
 
+        <form>
+          <button class="sign-out" type="submit">Sign Out!</button>
+        </form>
       </header>
 
       <div class="game-board">

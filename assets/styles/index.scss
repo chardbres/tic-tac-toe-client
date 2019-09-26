@@ -1,23 +1,24 @@
 @import '~bootstrap/scss/bootstrap';
 
-
-$bright-red: #ff0000;
-$black: #000000;
-$white: #FFFFFF;
+$black: #000;
+$bright-red: #f00;
+$white: #fff;
 $banner-height: 5vh;
 $gameboard-height: 80vh;
 $gameboard-width: $gameboard-height;
-$gameboard-color: #9EFFE6;
-$cell-color: #FEFAF7;
+$gameboard-color: #9effe6;
+$cell-color: #fefaf7;
 
 .banner {
   background-color: $black;
+  display: flex;
+  flex-direction: column;
   height: $banner-height;
+  justify-content: flex-start;
 }
 
 .game-board {
   align-self: center;
-  //border: 1px solid $bright-red;
   background-color: $gameboard-color;
   border-radius: 50px;
   display: flex;
@@ -68,4 +69,8 @@ $cell-color: #FEFAF7;
 
 .success {
  color: green;
+}
+
+#message {
+  float: right;
 }

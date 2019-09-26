@@ -4,17 +4,53 @@ const getFormFields = require('../../../lib/get-form-fields.js')
 const api = require('./api.js')
 const ui = require('./ui.js')
 
+// Sign-up event
 const onSignUp = function (event) {
   event.preventDefault()
 
   const form = event.target
   const formData = getFormFields(form)
-  console.log(form)
   api.signUp(formData)
     .then(ui.onSignUpSuccess)
     .catch(ui.onSignUpFailure)
 }
 
+// Sign-in event
+const onSignIn = function (event) {
+  event.preventDefault()
+
+  const form = event.target
+  const formData = getFormFields(form)
+  api.signIn(formData)
+    .then(ui.onSignInSuccess)
+    .catch(ui.onSignInFailure)
+}
+
+// Sign-out event
+const onSignOut = function (event) {
+  event.preventDefault()
+
+  const form = event.target
+  const formData = getFormFields(form)
+  api.signOut(formData)
+    .then(ui.onSignOutSuccess)
+    .catch(ui.onSignOutFailure)
+}
+
+// Password change event
+const onPasswordChange = function (event) {
+  event.preventDefault()
+
+  const form = event.target
+  const formData = getFormFields(form)
+  api.passwordChange(formData)
+    .then(ui.onPasswordChangeSuccess)
+    .catch(ui.onPasswordChangeFailure)
+}
+
 module.exports = {
-  onSignUp
+  onSignUp,
+  onSignIn,
+  onSignOut,
+  onPasswordChange
 }
