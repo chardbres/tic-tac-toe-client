@@ -7,14 +7,14 @@
 // require('./example')
 const gameEvents = require('./game/events.js')
 const authEvents = require('./auth/events.js')
-//const ui = require('./game/ui.js')
+const ui = require('./game/ui.js')
 
 $(() => {
   // Gameplay events
-  $('.box').on('click', gameEvents.switchPlayer)
   $('.box').on('click', gameEvents.claimSpace)
   // Gameplay api events
   $('.game-start').on('click', gameEvents.onCreateGame)
+  $('.game-get').on('click', gameEvents.onGetGame)
   // Authorization events
   $('.sign-up').on('submit', authEvents.onSignUp)
   $('.sign-in').on('submit', authEvents.onSignIn)

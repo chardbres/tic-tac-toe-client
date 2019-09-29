@@ -3,6 +3,7 @@
 const ui = require('./ui.js')
 const api = require('./api.js')
 const getFormFields = require('../../../lib/get-form-fields.js')
+const store = require('../store.js')
 
 // FUNCTIONS RELATED TO GAME LOGIC AND DISPLAY
 
@@ -23,7 +24,6 @@ const switchPlayer = function () {
     currentPlayer = playerOne
     console.log('Player is now: ' + currentPlayer)
   }
-  return currentPlayer
 }
 
 // Function to claim the space
@@ -62,6 +62,7 @@ const claimSpace = function () {
     console.log('Illegal move!')
   } else {
     gameBoard[val] = currentPlayer
+    onUpdateGame(val, currentPlayer)
     $(this).text(currentPlayer)
     switchPlayer()
     checkGame(gameBoard)
@@ -106,12 +107,33 @@ const checkGame = function (gameBoard) {
 
 // FUNCTIONS TO HANDLE GAMEPLAY API CALLS TO SERVER
 
-const onCreateGame = function (data) {
+const onCreateGame = function (event) {
   event.preventDefault()
 
-  api.createGame(data)
+  const form = event.target
+  const formData = getFormFields(form)
+  api.createGame(formData)
     .then(ui.onCreateGameSuccess)
     .catch(ui.onCreateGameFailure)
+}
+
+const onGetGame = function (event) {
+  event.preventDefault()
+
+  const form = event.target
+  const formData = getFormFields(form)
+  api.getGame(formData)
+    .then(ui.onGetGameSuccess)
+    .catch(ui.onGetGameFailure)
+}
+
+const onUpdateGame = function (cell, value) {
+  event.preventDefault()
+
+  api.updateGame(cell, value)
+    .then(ui.onUpdateGameSuccess)
+    .catch(ui.onUpdateGameFailure)
+  console.log('Cell is: ' + cell + ', Claimed by: ' + value)
 }
 
 // ----------
@@ -120,5 +142,7 @@ module.exports = {
   switchPlayer,
   claimSpace,
   checkGame,
-  onCreateGame
+  onCreateGame,
+  onGetGame,
+  onUpdateGame
 }
