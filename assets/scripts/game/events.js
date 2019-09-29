@@ -1,9 +1,13 @@
 'use strict'
 
 const ui = require('./ui.js')
+const api = require('./api.js')
+const getFormFields = require('../../../lib/get-form-fields.js')
+
+// FUNCTIONS RELATED TO GAME LOGIC AND DISPLAY
 
 // Initialize empty array to act as the game board
-const gameBoard = ['1', '2', '3', '4', '5', '6', '7', '8', '9']
+const gameBoard = ['', '', '', '', '', '', '', '', '']
 const playerOne = 'X'
 const playerTwo = 'O'
 // Start the game with X as the current player
@@ -60,8 +64,9 @@ const claimSpace = function () {
     gameBoard[val] = currentPlayer
     $(this).text(currentPlayer)
     switchPlayer()
+    checkGame(gameBoard)
+    console.log(gameBoard)
   }
-  checkGame(gameBoard)
 }
 
 // Function to check game win/loss/tie status
@@ -69,21 +74,21 @@ const checkGame = function (gameBoard) {
   let winCondition = false
   if (winCondition === false && counter <= 9) {
     counter += 1
-    if (gameBoard[0] === gameBoard[1] && gameBoard[1] === gameBoard[2]) {
+    if (gameBoard[0] === gameBoard[1] && gameBoard[1] === gameBoard[2] && gameBoard[0] !== '') {
       winCondition = true
-    } else if (gameBoard[3] === gameBoard[4] && gameBoard[4] === gameBoard[5]) {
+    } else if (gameBoard[3] === gameBoard[4] && gameBoard[4] === gameBoard[5] && gameBoard[3] !== '') {
       winCondition = true
-    } else if (gameBoard[6] === gameBoard[7] && gameBoard[7] === gameBoard[8]) {
+    } else if (gameBoard[6] === gameBoard[7] && gameBoard[7] === gameBoard[8] && gameBoard[6] !== '') {
       winCondition = true
-    } else if (gameBoard[0] === gameBoard[3] && gameBoard[3] === gameBoard[6]) {
+    } else if (gameBoard[0] === gameBoard[3] && gameBoard[3] === gameBoard[6] && gameBoard[0] !== '') {
       winCondition = true
-    } else if (gameBoard[1] === gameBoard[4] && gameBoard[4] === gameBoard[7]) {
+    } else if (gameBoard[1] === gameBoard[4] && gameBoard[4] === gameBoard[7] && gameBoard[1] !== '') {
       winCondition = true
-    } else if (gameBoard[2] === gameBoard[5] && gameBoard[5] === gameBoard[8]) {
+    } else if (gameBoard[2] === gameBoard[5] && gameBoard[5] === gameBoard[8] && gameBoard[2] !== '') {
       winCondition = true
-    } else if (gameBoard[0] === gameBoard[4] && gameBoard[4] === gameBoard[8]) {
+    } else if (gameBoard[0] === gameBoard[4] && gameBoard[4] === gameBoard[8] && gameBoard[0] !== '') {
       winCondition = true
-    } else if (gameBoard[2] === gameBoard[4] && gameBoard[4] === gameBoard[6]) {
+    } else if (gameBoard[2] === gameBoard[4] && gameBoard[4] === gameBoard[6] && gameBoard[2] !== '') {
       winCondition = true
     } else if (winCondition === false && counter === 9) {
       console.log("It's a tie!")
@@ -91,14 +96,29 @@ const checkGame = function (gameBoard) {
     }
     console.log(counter)
     if (winCondition === true) {
-      Window.alert('Winner!')
+      alert('Winner!')
       return winCondition
     }
   }
 }
 
+// ----------
+
+// FUNCTIONS TO HANDLE GAMEPLAY API CALLS TO SERVER
+
+const onCreateGame = function (data) {
+  event.preventDefault()
+
+  api.createGame(data)
+    .then(ui.onCreateGameSuccess)
+    .catch(ui.onCreateGameFailure)
+}
+
+// ----------
+
 module.exports = {
   switchPlayer,
   claimSpace,
-  checkGame
+  checkGame,
+  onCreateGame
 }
