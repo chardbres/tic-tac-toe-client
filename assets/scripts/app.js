@@ -5,14 +5,18 @@
 
 // use require without a reference to ensure a file is bundled
 // require('./example')
-
+const gameEvents = require('./game/events.js')
 const authEvents = require('./auth/events.js')
+const ui = require('./game/ui.js')
 
 $(() => {
-  $('.box').on('click', function (event) {
-    $(this).css('background-color', 'red')
-    console.log('Cell has been clicked!')
-  })
+  // Gameplay events
+  $('.box').on('click', gameEvents.claimSpace)
+  // Gameplay api events
+  $('.game-start').on('click', gameEvents.onCreateGame)
+  $('.game-get').on('click', gameEvents.onGetGame)
+  $('.end-game').on('click', gameEvents.onEndGame)
+  // Authorization events
   $('.sign-up').on('submit', authEvents.onSignUp)
   $('.sign-in').on('submit', authEvents.onSignIn)
   $('.sign-out').on('submit', authEvents.onSignOut)

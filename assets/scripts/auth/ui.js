@@ -28,9 +28,8 @@ const onSignUpFailure = function () {
 // Sign-in success and failure notifications
 const onSignInSuccess = function (responseData) {
   successMessage('Signed in successfully!')
-  console.log('responseData is ', responseData)
   store.user = responseData.user
-  console.log('store is ', store)
+  console.log('store is: ', store)
   // When sign-in is successful, hide the sign-in and sign-up fields
   $('.sign-in').fadeOut(fadeDuration)
   $('.sign-up').fadeOut(fadeDuration)
@@ -44,8 +43,6 @@ const onSignInFailure = function () {
 // Sign-out success and failure notifications
 const onSignOutSuccess = function () {
   successMessage('Signed out successfully!')
-
-  $('.sign-in').fadeIn(fadeDuration)
 }
 
 const onSignOutFailure = function () {

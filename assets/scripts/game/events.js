@@ -1,9 +1,13 @@
 'use strict'
 
 const ui = require('./ui.js')
+const api = require('./api.js')
+const getFormFields = require('../../../lib/get-form-fields.js')
+
+// FUNCTIONS RELATED TO GAME LOGIC AND DISPLAY
 
 // Initialize empty array to act as the game board
-const gameBoard = ['1', '2', '3', '4', '5', '6', '7', '8', '9']
+const gameBoard = ['', '', '', '', '', '', '', '', '']
 const playerOne = 'X'
 const playerTwo = 'O'
 // Start the game with X as the current player
@@ -19,7 +23,6 @@ const switchPlayer = function () {
     currentPlayer = playerOne
     console.log('Player is now: ' + currentPlayer)
   }
-  return currentPlayer
 }
 
 // Function to claim the space
@@ -58,10 +61,12 @@ const claimSpace = function () {
     console.log('Illegal move!')
   } else {
     gameBoard[val] = currentPlayer
+    onUpdateGame(val, currentPlayer)
     $(this).text(currentPlayer)
     switchPlayer()
+    checkGame(gameBoard)
+    console.log(gameBoard)
   }
-  checkGame(gameBoard)
 }
 
 // Function to check game win/loss/tie status
@@ -69,36 +74,87 @@ const checkGame = function (gameBoard) {
   let winCondition = false
   if (winCondition === false && counter <= 9) {
     counter += 1
-    if (gameBoard[0] === gameBoard[1] && gameBoard[1] === gameBoard[2]) {
+    if (gameBoard[0] === gameBoard[1] && gameBoard[1] === gameBoard[2] && gameBoard[0] !== '') {
       winCondition = true
-    } else if (gameBoard[3] === gameBoard[4] && gameBoard[4] === gameBoard[5]) {
+    } else if (gameBoard[3] === gameBoard[4] && gameBoard[4] === gameBoard[5] && gameBoard[3] !== '') {
       winCondition = true
-    } else if (gameBoard[6] === gameBoard[7] && gameBoard[7] === gameBoard[8]) {
+    } else if (gameBoard[6] === gameBoard[7] && gameBoard[7] === gameBoard[8] && gameBoard[6] !== '') {
       winCondition = true
-    } else if (gameBoard[0] === gameBoard[3] && gameBoard[3] === gameBoard[6]) {
+    } else if (gameBoard[0] === gameBoard[3] && gameBoard[3] === gameBoard[6] && gameBoard[0] !== '') {
       winCondition = true
-    } else if (gameBoard[1] === gameBoard[4] && gameBoard[4] === gameBoard[7]) {
+    } else if (gameBoard[1] === gameBoard[4] && gameBoard[4] === gameBoard[7] && gameBoard[1] !== '') {
       winCondition = true
-    } else if (gameBoard[2] === gameBoard[5] && gameBoard[5] === gameBoard[8]) {
+    } else if (gameBoard[2] === gameBoard[5] && gameBoard[5] === gameBoard[8] && gameBoard[2] !== '') {
       winCondition = true
-    } else if (gameBoard[0] === gameBoard[4] && gameBoard[4] === gameBoard[8]) {
+    } else if (gameBoard[0] === gameBoard[4] && gameBoard[4] === gameBoard[8] && gameBoard[0] !== '') {
       winCondition = true
-    } else if (gameBoard[2] === gameBoard[4] && gameBoard[4] === gameBoard[6]) {
+    } else if (gameBoard[2] === gameBoard[4] && gameBoard[4] === gameBoard[6] && gameBoard[2] !== '') {
       winCondition = true
     } else if (winCondition === false && counter === 9) {
       console.log("It's a tie!")
-      return winCondition
     }
     console.log(counter)
     if (winCondition === true) {
-      Window.alert('Winner!')
-      return winCondition
+      alert('Winner!')
+      onEndGame()
     }
   }
 }
 
+// ----------
+
+// FUNCTIONS TO HANDLE GAMEPLAY API CALLS TO SERVER
+
+// Function to create a new game on the server
+const onCreateGame = function (event) {
+  event.preventDefault()
+
+  const form = event.target
+  const formData = getFormFields(form)
+  api.createGame(formData)
+    .then(ui.onCreateGameSuccess)
+    .catch(ui.onCreateGameFailure)
+}
+
+// Function to return a list of all games for the current user on the server
+const onGetGame = function (event) {
+  event.preventDefault()
+
+  const form = event.target
+  const formData = getFormFields(form)
+  api.getGame(formData)
+    .then(ui.onGetGameSuccess)
+    .catch(ui.onGetGameFailure)
+}
+
+// Function to update the current game on the server and return the game board state
+const onUpdateGame = function (cell, value) {
+  event.preventDefault()
+
+  api.updateGame(cell, value)
+    .then(ui.onUpdateGameSuccess)
+    .catch(ui.onUpdateGameFailure)
+  console.log('Cell is: ' + cell + ', Claimed by: ' + value)
+}
+
+// Ends the current game
+const onEndGame = function () {
+  event.preventDefault()
+
+  const form = event.target
+  const formData = getFormFields(form)
+  api.endGame(formData)
+    .then(ui.onEndGame)
+}
+
+// ----------
+
 module.exports = {
   switchPlayer,
   claimSpace,
-  checkGame
+  checkGame,
+  onCreateGame,
+  onGetGame,
+  onUpdateGame,
+  onEndGame
 }

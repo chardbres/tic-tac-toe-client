@@ -47,23 +47,28 @@ $cell-color: #fefaf7;
   justify-content: center;
 }
 
+.game-start {
+  display: flex;
+  justify-content: center;
+}
+
 .failure {
   color: red;
 }
 
-.one {
+#one {
   border-top-left-radius: 30px;
 }
 
-.three {
+#three {
   border-top-right-radius: 30px;
 }
 
-.seven {
+#seven {
   border-bottom-left-radius: 30px;
 }
 
-.nine {
+#nine {
   border-bottom-right-radius: 30px;
 }
 
