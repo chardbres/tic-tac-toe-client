@@ -15,6 +15,7 @@ $(() => {
   // Gameplay api events
   $('.game-start').on('click', gameEvents.onCreateGame)
   $('.game-get').on('click', gameEvents.onGetGame)
+  $('.end-game').on('click', gameEvents.onEndGame)
   // Authorization events
   $('.sign-up').on('submit', authEvents.onSignUp)
   $('.sign-in').on('submit', authEvents.onSignIn)

@@ -3,7 +3,6 @@
 const ui = require('./ui.js')
 const api = require('./api.js')
 const getFormFields = require('../../../lib/get-form-fields.js')
-const store = require('../store.js')
 
 // FUNCTIONS RELATED TO GAME LOGIC AND DISPLAY
 
@@ -93,12 +92,11 @@ const checkGame = function (gameBoard) {
       winCondition = true
     } else if (winCondition === false && counter === 9) {
       console.log("It's a tie!")
-      return winCondition
     }
     console.log(counter)
     if (winCondition === true) {
       alert('Winner!')
-      return winCondition
+      onEndGame()
     }
   }
 }
@@ -107,6 +105,7 @@ const checkGame = function (gameBoard) {
 
 // FUNCTIONS TO HANDLE GAMEPLAY API CALLS TO SERVER
 
+// Function to create a new game on the server
 const onCreateGame = function (event) {
   event.preventDefault()
 
@@ -117,6 +116,7 @@ const onCreateGame = function (event) {
     .catch(ui.onCreateGameFailure)
 }
 
+// Function to return a list of all games for the current user on the server
 const onGetGame = function (event) {
   event.preventDefault()
 
@@ -127,6 +127,7 @@ const onGetGame = function (event) {
     .catch(ui.onGetGameFailure)
 }
 
+// Function to update the current game on the server and return the game board state
 const onUpdateGame = function (cell, value) {
   event.preventDefault()
 
@@ -134,6 +135,16 @@ const onUpdateGame = function (cell, value) {
     .then(ui.onUpdateGameSuccess)
     .catch(ui.onUpdateGameFailure)
   console.log('Cell is: ' + cell + ', Claimed by: ' + value)
+}
+
+// Ends the current game
+const onEndGame = function () {
+  event.preventDefault()
+
+  const form = event.target
+  const formData = getFormFields(form)
+  api.endGame(formData)
+    .then(ui.onEndGame)
 }
 
 // ----------
@@ -144,5 +155,6 @@ module.exports = {
   checkGame,
   onCreateGame,
   onGetGame,
-  onUpdateGame
+  onUpdateGame,
+  onEndGame
 }

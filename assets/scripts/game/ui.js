@@ -1,4 +1,5 @@
 'use strict'
+
 const store = require('../store')
 
 const successMessage = function (msgText) {
@@ -20,7 +21,7 @@ const captureColor = function (player) {
   }
 }
 
-// If game is created successfully, this script stores the game ID in store.js, and logs the newly created object to the console.
+// Game creation success and failure scripts
 const onCreateGameSuccess = function (responseData) {
   successMessage('Game successfully created!')
   store.game = responseData.game
@@ -30,15 +31,41 @@ const onCreateGameSuccess = function (responseData) {
 const onCreateGameFailure = function () {
   failureMessage('Failed to create game!')
 }
+// ---
+
+// Game retrieval success and failure scripts
+const onGetGameSucccess = function (responseData) {
+  console.log(JSON.stringify(responseData))
+}
+
+const onGetGameFailure = function () {
+  console.log('Failed to retrieve game list.')
+}
+// ---
 
 // If the game is updated successfully, this script logs the data returned from the server to the console
 const onUpdateGameSuccess = function (responseData) {
   console.log('Store is: ' + JSON.stringify(responseData))
 }
 
+const onUpdateGameFailure = function () {
+  console.log('Game failed to update!')
+}
+// ---
+
+// Ends the current game
+const onEndGame = function (responseData) {
+  console.log(JSON.stringify(responseData))
+}
+// ---
+
 module.exports = {
   captureColor,
   onCreateGameSuccess,
   onCreateGameFailure,
-  onUpdateGameSuccess
+  onGetGameSucccess,
+  onGetGameFailure,
+  onUpdateGameSuccess,
+  onUpdateGameFailure,
+  onEndGame
 }

@@ -43,8 +43,6 @@ const onSignInFailure = function () {
 // Sign-out success and failure notifications
 const onSignOutSuccess = function () {
   successMessage('Signed out successfully!')
-
-  $('.sign-in').fadeIn(fadeDuration)
 }
 
 const onSignOutFailure = function () {
