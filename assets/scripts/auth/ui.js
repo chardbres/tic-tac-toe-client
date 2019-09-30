@@ -4,15 +4,15 @@ const store = require('../store')
 const fadeDuration = 800
 
 const successMessage = function (msgText) {
-  $('#message').text(msgText)
-  $('#message').removeClass('failure')
-  $('#message').addClass('success')
+  $('.message').text(msgText)
+  $('.message').removeClass('failure')
+  $('.message').addClass('success')
 }
 
 const failureMessage = function (msgText) {
-  $('#message').text(msgText)
-  $('#message').removeClass('success')
-  $('#message').addClass('failure')
+  $('.message').text(msgText)
+  $('.message').removeClass('success')
+  $('.message').addClass('failure')
 }
 
 // Sign-up success and failure notifications
@@ -33,6 +33,8 @@ const onSignInSuccess = function (responseData) {
   // When sign-in is successful, hide the sign-in and sign-up fields
   $('.sign-in').fadeOut(fadeDuration)
   $('.sign-up').fadeOut(fadeDuration)
+  $('.change-password').show()
+  $('.sign-out').show()
 }
 
 const onSignInFailure = function () {

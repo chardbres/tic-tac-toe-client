@@ -3,15 +3,15 @@
 const store = require('../store')
 
 const successMessage = function (msgText) {
-  $('#message').text(msgText)
-  $('#message').removeClass('failure')
-  $('#message').addClass('success')
+  $('.message').text(msgText)
+  $('.message').removeClass('failure')
+  $('.message').addClass('success')
 }
 
 const failureMessage = function (msgText) {
-  $('#message').text(msgText)
-  $('#message').removeClass('success')
-  $('#message').addClass('failure')
+  $('.message').text(msgText)
+  $('.message').removeClass('success')
+  $('.message').addClass('failure')
 }
 const captureColor = function (player) {
   if (player === 'X') {

@@ -14,6 +14,16 @@ const playerTwo = 'O'
 let currentPlayer = playerOne
 let counter = 0
 
+// Function that begins the game locally and on the server, and allows the board to be interacted without
+const activateBoard = function () {
+  $('.box').addClass('clickable')
+  onCreateGame()
+}
+
+const completeGame = function () {
+  $('.box').removeClass('clickable')
+  onEndGame()
+}
 // Function to switch players after clicking on a space
 const switchPlayer = function () {
   if (currentPlayer === playerOne) {
@@ -96,7 +106,7 @@ const checkGame = function (gameBoard) {
     console.log(counter)
     if (winCondition === true) {
       alert('Winner!')
-      onEndGame()
+      completeGame()
     }
   }
 }
@@ -106,7 +116,7 @@ const checkGame = function (gameBoard) {
 // FUNCTIONS TO HANDLE GAMEPLAY API CALLS TO SERVER
 
 // Function to create a new game on the server
-const onCreateGame = function (event) {
+const onCreateGame = function () {
   event.preventDefault()
 
   const form = event.target
@@ -150,11 +160,11 @@ const onEndGame = function () {
 // ----------
 
 module.exports = {
+  activateBoard,
   switchPlayer,
   claimSpace,
   checkGame,
   onCreateGame,
   onGetGame,
-  onUpdateGame,
-  onEndGame
+  onUpdateGame
 }

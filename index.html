@@ -13,30 +13,32 @@
     </head>
     <body>
       <header class="banner">
-        <h2 id="message"></h2>
-        <!-- Sign-up form -->
-        <form class="sign-up">
-          <input type="text" name="credentials[email]" placeholder="Enter e-mail" />
-          <input type="password" name="credentials[password]" placeholder="Enter password"  />
-          <input type="password" name="credentials[password_confirmation]" placeholder="Re-enter password"  />
-          <button type="submit">Sign Up!</button>
-        </form>
-        <!--Sign-in form -->
-        <form class="sign-in">
-          <input type="text" name="credentials[email]" placeholder="Enter e-mail" />
-          <input type="password" name="credentials[password]" placeholder="Enter password"  />
-          <button type="submit">Sign In!</button>
-        </form>
-        <!-- Password change form -->
-        <form class="change-password">
-          <input type="password" name="passwords[old]" placeholder="Enter old password..."  />
-          <input type="password" name="passwords[new]" placeholder="Enter new password..."  />
-          <button type="submit">Change Password</button>
-        </form>
-
-        <form>
-          <button class="sign-out" type="submit">Sign Out!</button>
-        </form>
+        <div>
+          <!-- Sign-up form -->
+          <form class="sign-up">
+            <input type="text" name="credentials[email]" placeholder="Enter e-mail" />
+            <input type="password" name="credentials[password]" placeholder="Enter password"  />
+            <input type="password" name="credentials[password_confirmation]" placeholder="Re-enter password"  />
+            <button type="submit">Sign Up!</button>
+          </form>
+          <!--Sign-in form -->
+          <form class="sign-in">
+            <input type="text" name="credentials[email]" placeholder="Enter e-mail" />
+            <input type="password" name="credentials[password]" placeholder="Enter password"  />
+            <button type="submit">Sign In!</button>
+          </form>
+          <!-- Password change form -->
+          <form class="change-password">
+            <input type="password" name="passwords[old]" placeholder="Enter old password..."  />
+            <input type="password" name="passwords[new]" placeholder="Enter new password..."  />
+            <button type="submit">Change Password</button>
+          </form>
+          <!-- Sign-out form -->
+          <form>
+            <button class="sign-out" type="submit">Sign Out!</button>
+          </form>
+        </div>
+        <h2 class="message">Sign in to play!</h2>
       </header>
 
       <!-- Game board -->
@@ -59,14 +61,13 @@
           </div>
         </div>
       </div>
-      <div class="game-start">
-        <button type="button">Start Game!</button>
+
+      <div class="game-buttons">
+        <button class="game-start" type="button">Start Game!</button>
       </div>
-      <div class="game-get">
+
+      <!-- <div class="game-get">
         <button type="button">Get list of all games</button>
-      </div>
-      <div class="end-game">
-        <button type="button">End Game</button>
-      </div>
+      </div> -->
     </body>
 </html>
