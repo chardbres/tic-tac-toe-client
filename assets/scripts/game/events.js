@@ -40,7 +40,7 @@ const winGame = function (winningPlayer) {
   onEndGame()
 }
 // Function to switch players after clicking on a space
-const switchPlayer = function () {
+const switchPlayer = () => {
   if (currentPlayer === playerOne) {
     currentPlayer = playerTwo
     console.log('Player is now: ' + currentPlayer)
@@ -51,7 +51,7 @@ const switchPlayer = function () {
 }
 
 // Function to claim the space
-const claimSpace = function () {
+const claimSpace = () => {
   const val = $(this).attr('id')
 
   if (gameBoard[val - 1] === 'X' || gameBoard[val - 1] === 'O') {
@@ -61,14 +61,13 @@ const claimSpace = function () {
     $('.game-message').text(currentPlayer + ' claims cell ' + val + '!')
     onUpdateGame(val, currentPlayer)
     $(this).text(currentPlayer)
-    checkGame(gameBoard)
+    checkGame()
     switchPlayer()
-    console.log(gameBoard)
   }
 }
 
 // Function to check game win/loss/tie status
-const checkGame = function (gameBoard) {
+const checkGame = () => {
   let winCondition = false
   if (winCondition === false && counter <= 9) {
     counter += 1
@@ -92,10 +91,9 @@ const checkGame = function (gameBoard) {
       $('.game-message').fadeIn(800, function () { $('.game-message').text("It's a tie! Click Start Game to play another!") })
       onEndGame()
     }
-    console.log(counter)
-    if (winCondition === true) {
-      winGame(currentPlayer)
-    }
+  }
+  if (winCondition === true) {
+    winGame(currentPlayer)
   }
 }
 
@@ -104,7 +102,7 @@ const checkGame = function (gameBoard) {
 // FUNCTIONS TO HANDLE GAMEPLAY API CALLS TO SERVER
 
 // Function to create a new game on the server
-const onCreateGame = function () {
+const onCreateGame = () => {
   event.preventDefault()
 
   const form = event.target
@@ -128,7 +126,6 @@ const onUpdateGame = (cell, value) => {
   api.updateGame(cell, value)
     .then(ui.onUpdateGameSuccess)
     .catch(ui.onUpdateGameFailure)
-  console.log('Cell is: ' + cell + ', Claimed by: ' + value)
 }
 
 // Ends the current game

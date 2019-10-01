@@ -30,7 +30,6 @@ const onSignUpFailure = function () {
 const onSignInSuccess = function (responseData) {
   successMessage('Signed in successfully!')
   store.user = responseData.user
-  console.log('store is: ', store)
   // When sign-in is successful, hide the sign-in and sign-up fields
   $('.sign-in').fadeOut(fadeDuration, function () { $('.change-password').show() })
   $('.sign-up').fadeOut(fadeDuration, function () { $('.sign-out').show() })
