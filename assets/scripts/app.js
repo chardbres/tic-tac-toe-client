@@ -16,8 +16,7 @@ $(() => {
   $('.game-start').on('click', gameEvents.activateBoard)
   $('.game-board').on('click', '.clickable', gameEvents.claimSpace)
   // Gameplay api events
-  $('.end-game').on('click', gameEvents.onEndGame)
-  $('.count-button').on('click', gameEvents.getGames)
+  $('.count-button').on('click', gameEvents.onGetGames)
   // Authorization events
   $('.sign-up').on('submit', authEvents.onSignUp)
   $('.sign-in').on('submit', authEvents.onSignIn)

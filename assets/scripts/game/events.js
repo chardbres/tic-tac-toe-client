@@ -19,7 +19,7 @@ const activateBoard = () => {
   // Resets the game box class
   $('.clickable').removeClass('.clickable')
 
-  // Resets the values in the game board
+  // Resets the Xs/Os in the game board and the current player to playerOne
   $('.box').text('')
   currentPlayer = playerOne
   // Resets the game counter to 0 and all the gameBoard values to blanks
@@ -28,17 +28,11 @@ const activateBoard = () => {
     gameBoard[i] = ''
   }
   // ---
-
   $('.game-message').text('Game Started! X begins, choose your opening wisely!')
   $('.box').addClass('clickable')
   onCreateGame()
 }
 
-const winGame = winningPlayer => {
-  $('.box').removeClass('clickable')
-  $('.game-message').text('Player ' + winningPlayer + ' is the champion! Click Start Game to play a new round!')
-  onEndGame()
-}
 // Function to switch players after clicking on a space
 const switchPlayer = () => {
   if (currentPlayer === playerOne) {
@@ -57,9 +51,8 @@ const claimSpace = function () {
     $('.game-message').text('Cell is already claimed! Choose another!')
   } else {
     gameBoard[val - 1] = currentPlayer
-    $('.game-message').text(currentPlayer + ' claims cell ' + val + '!')
     onUpdateGame(val, currentPlayer)
-    $(this).text(currentPlayer)
+    // Checks game state for winner and switches player control if nobody has won
     checkGame()
     switchPlayer()
   }
@@ -87,12 +80,11 @@ const checkGame = () => {
     } else if (gameBoard[2] === gameBoard[4] && gameBoard[4] === gameBoard[6] && gameBoard[2] !== '') {
       winCondition = true
     } else if (winCondition === false && counter === 9) {
-      $('.game-message').fadeIn(800, function () { $('.game-message').text("It's a tie! Click Start Game to play another!") })
-      onEndGame()
+      onEndGame(currentPlayer, winCondition)
     }
   }
   if (winCondition === true) {
-    winGame(currentPlayer)
+    onEndGame(currentPlayer, winCondition)
   }
 }
 
@@ -112,29 +104,29 @@ const onCreateGame = () => {
 }
 
 // Function to return a list of all games for the current user on the server
-const getGames = () => {
+const onGetGames = () => {
   api.getGames()
     .then(ui.onGetGamesSuccess)
     .catch(ui.onGetGamesFailure)
 }
 
-// Function to update the current game on the server and return the game board state
+// Function to update the current game on the server and return the game board state. Updated to handle UI events in the onUpdateSuccess fucntion call.
 const onUpdateGame = (cell, player) => {
   event.preventDefault()
 
   api.updateGame(cell, player)
-    .then(ui.onUpdateGameSuccess)
+    .then(ui.onUpdateGameSuccess(cell, player))
     .catch(ui.onUpdateGameFailure)
 }
 
 // Ends the current game
-const onEndGame = () => {
+const onEndGame = (player, winCondition) => {
   event.preventDefault()
 
   const form = event.target
   const formData = getFormFields(form)
   api.endGame(formData)
-    .then(ui.onEndGame)
+    .then(ui.onEndGame(player, winCondition))
 }
 
 // ----------
@@ -145,6 +137,6 @@ module.exports = {
   claimSpace,
   checkGame,
   onCreateGame,
-  getGames,
+  onGetGames,
   onUpdateGame
 }

@@ -36,29 +36,36 @@ const onGetGamesFailure = () => {
 // ---
 
 // If the game is updated successfully, this script logs the data returned from the server to the console
-// This does not seem to be firing off for some reason, even though the game is properly updated on the server
-const onUpdateGamesSuccess = responseData => {
-  console.log('made it here!')
-  console.log(responseData)
+const onUpdateGameSuccess = function (cell, player) {
+  $('.game-message').text(player + ' has claimed cell ' + cell + '!')
+  $('#' + cell).text(player)
 }
 
-const onUpdateGamesFailure = () => {
+const onUpdateGameFailure = () => {
   $('.game-message').text('Game failed to update!')
 }
 // ---
 
 // Ends the current game
-// const onEndGame = responseData => {
-//   console.log(JSON.stringify(responseData))
-// }
+const onEndGame = (player, winCondition) => {
+  if (winCondition === true) {
+    $('.game-message').text(player + ' has won the game! Click button to play again!')
+  } else {
+    $('.game-message').text("It's a draw! Click button to play again!")
+  }
+}
 // ---
 
 module.exports = {
+  // onCreateGame
   onCreateGameSuccess,
   onCreateGameFailure,
+  // onGetGames
   onGetGamesSuccess,
   onGetGamesFailure,
-  onUpdateGamesSuccess,
-  onUpdateGamesFailure
-//  onEndGame
+  // onUpdateGame
+  onUpdateGameSuccess,
+  onUpdateGameFailure,
+  // onEndGame
+  onEndGame
 }
