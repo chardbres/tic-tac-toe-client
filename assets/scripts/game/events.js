@@ -100,6 +100,8 @@ const onCreateGame = () => {
   const formData = getFormFields(form)
   api.createGame(formData)
     .then(ui.onCreateGameSuccess)
+    // Pulls number of games played after the game is successfully created, so that the new game is added to the total.
+    .then(onGetGames)
     .catch(ui.onCreateGameFailure)
 }
 

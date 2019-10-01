@@ -1,5 +1,6 @@
 'use strict'
 
+const gameEvents = require('../game/events.js')
 const getFormFields = require('../../../lib/get-form-fields.js')
 const api = require('./api.js')
 const ui = require('./ui.js')
@@ -23,6 +24,8 @@ const onSignIn = function (event) {
   const formData = getFormFields(form)
   api.signIn(formData)
     .then(ui.onSignInSuccess)
+    // Retrieves and displays the total games played counter on successful sign-in
+    .then(gameEvents.onGetGames)
     .catch(ui.onSignInFailure)
 }
 

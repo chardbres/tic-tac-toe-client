@@ -92,6 +92,7 @@ $cell-color: #fefaf7;
 }
 
 .game-message {
+  border: 1px solid $bright-green;
   display: flex;
   justify-content: center;
   margin: 2em auto;
