@@ -34,7 +34,7 @@ const activateBoard = () => {
   onCreateGame()
 }
 
-const winGame = function (winningPlayer) {
+const winGame = winningPlayer => {
   $('.box').removeClass('clickable')
   $('.game-message').text('Player ' + winningPlayer + ' is the champion! Click Start Game to play a new round!')
   onEndGame()
@@ -43,15 +43,14 @@ const winGame = function (winningPlayer) {
 const switchPlayer = () => {
   if (currentPlayer === playerOne) {
     currentPlayer = playerTwo
-    console.log('Player is now: ' + currentPlayer)
   } else if (currentPlayer === playerTwo) {
     currentPlayer = playerOne
-    console.log('Player is now: ' + currentPlayer)
   }
 }
 
 // Function to claim the space
-const claimSpace = () => {
+// Breaks when I use the fat arrow notation for some reason!
+const claimSpace = function () {
   const val = $(this).attr('id')
 
   if (gameBoard[val - 1] === 'X' || gameBoard[val - 1] === 'O') {
@@ -120,10 +119,10 @@ const getGames = () => {
 }
 
 // Function to update the current game on the server and return the game board state
-const onUpdateGame = (cell, value) => {
+const onUpdateGame = (cell, player) => {
   event.preventDefault()
 
-  api.updateGame(cell, value)
+  api.updateGame(cell, player)
     .then(ui.onUpdateGameSuccess)
     .catch(ui.onUpdateGameFailure)
 }

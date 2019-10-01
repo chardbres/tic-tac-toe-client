@@ -18,7 +18,6 @@ const failureMessage = msgText => {
 const onCreateGameSuccess = responseData => {
   successMessage('Game successfully created!')
   store.game = responseData.game
-  console.log('Store is: ' + JSON.stringify(store.game))
 }
 
 const onCreateGameFailure = () => {
@@ -31,25 +30,27 @@ const onGetGamesSuccess = responseData => {
   $('.game-count').text(responseData.games.length)
 }
 
-const onGetGamesFailure = function () {
-  console.log('Failed to retrieve game list.')
+const onGetGamesFailure = () => {
+  $('.game-count').text('Could not retrieve games list!')
 }
 // ---
 
 // If the game is updated successfully, this script logs the data returned from the server to the console
+// This does not seem to be firing off for some reason, even though the game is properly updated on the server
 const onUpdateGamesSuccess = responseData => {
-  console.log('Store is: ' + JSON.stringify(responseData))
+  console.log('made it here!')
+  console.log(responseData)
 }
 
 const onUpdateGamesFailure = () => {
-  console.log('Game failed to update!')
+  $('.game-message').text('Game failed to update!')
 }
 // ---
 
 // Ends the current game
-const onEndGame = responseData => {
-  console.log(JSON.stringify(responseData))
-}
+// const onEndGame = responseData => {
+//   console.log(JSON.stringify(responseData))
+// }
 // ---
 
 module.exports = {
@@ -58,6 +59,6 @@ module.exports = {
   onGetGamesSuccess,
   onGetGamesFailure,
   onUpdateGamesSuccess,
-  onUpdateGamesFailure,
-  onEndGame
+  onUpdateGamesFailure
+//  onEndGame
 }
