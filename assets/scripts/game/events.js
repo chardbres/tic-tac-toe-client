@@ -15,13 +15,28 @@ let currentPlayer = playerOne
 let counter = 0
 
 // Function that begins the game locally and on the server, and allows the board to be interacted without
-const activateBoard = function () {
+const activateBoard = () => {
+  // Resets the game box class
+  $('.clickable').removeClass('.clickable')
+
+  // Resets the values in the game board
+  $('.box').text('')
+  currentPlayer = playerOne
+  // Resets the game counter to 0 and all the gameBoard values to blanks
+  counter = 0
+  for (let i = 0; i < gameBoard.length; i++) {
+    gameBoard[i] = ''
+  }
+  // ---
+
+  $('.game-message').text('Game Started! X begins, choose your opening wisely!')
   $('.box').addClass('clickable')
   onCreateGame()
 }
 
-const completeGame = function () {
+const winGame = function (winningPlayer) {
   $('.box').removeClass('clickable')
+  $('.game-message').text('Player ' + winningPlayer + ' is the champion! Click Start Game to play a new round!')
   onEndGame()
 }
 // Function to switch players after clicking on a space
@@ -37,44 +52,17 @@ const switchPlayer = function () {
 
 // Function to claim the space
 const claimSpace = function () {
-  let val
-  switch ($(this).attr('id')) {
-    case 'one':
-      val = 0
-      break
-    case 'two':
-      val = 1
-      break
-    case 'three':
-      val = 2
-      break
-    case 'four':
-      val = 3
-      break
-    case 'five':
-      val = 4
-      break
-    case 'six':
-      val = 5
-      break
-    case 'seven':
-      val = 6
-      break
-    case 'eight':
-      val = 7
-      break
-    case 'nine':
-      val = 8
-  }
+  const val = $(this).attr('id')
 
-  if (gameBoard[val] === 'X' || gameBoard[val] === 'O') {
-    console.log('Illegal move!')
+  if (gameBoard[val - 1] === 'X' || gameBoard[val - 1] === 'O') {
+    $('.game-message').text('Cell is already claimed! Choose another!')
   } else {
-    gameBoard[val] = currentPlayer
+    gameBoard[val - 1] = currentPlayer
+    $('.game-message').text(currentPlayer + ' claims cell ' + val + '!')
     onUpdateGame(val, currentPlayer)
     $(this).text(currentPlayer)
-    switchPlayer()
     checkGame(gameBoard)
+    switchPlayer()
     console.log(gameBoard)
   }
 }
@@ -101,12 +89,12 @@ const checkGame = function (gameBoard) {
     } else if (gameBoard[2] === gameBoard[4] && gameBoard[4] === gameBoard[6] && gameBoard[2] !== '') {
       winCondition = true
     } else if (winCondition === false && counter === 9) {
-      console.log("It's a tie!")
+      $('.game-message').fadeIn(800, function () { $('.game-message').text("It's a tie! Click Start Game to play another!") })
+      onEndGame()
     }
     console.log(counter)
     if (winCondition === true) {
-      alert('Winner!')
-      completeGame()
+      winGame(currentPlayer)
     }
   }
 }
@@ -127,18 +115,14 @@ const onCreateGame = function () {
 }
 
 // Function to return a list of all games for the current user on the server
-const onGetGame = function (event) {
-  event.preventDefault()
-
-  const form = event.target
-  const formData = getFormFields(form)
-  api.getGame(formData)
-    .then(ui.onGetGameSuccess)
-    .catch(ui.onGetGameFailure)
+const getGames = () => {
+  api.getGames()
+    .then(ui.onGetGamesSuccess)
+    .catch(ui.onGetGamesFailure)
 }
 
 // Function to update the current game on the server and return the game board state
-const onUpdateGame = function (cell, value) {
+const onUpdateGame = (cell, value) => {
   event.preventDefault()
 
   api.updateGame(cell, value)
@@ -148,7 +132,7 @@ const onUpdateGame = function (cell, value) {
 }
 
 // Ends the current game
-const onEndGame = function () {
+const onEndGame = () => {
   event.preventDefault()
 
   const form = event.target
@@ -165,6 +149,6 @@ module.exports = {
   claimSpace,
   checkGame,
   onCreateGame,
-  onGetGame,
+  getGames,
   onUpdateGame
 }

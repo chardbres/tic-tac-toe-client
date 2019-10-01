@@ -2,70 +2,62 @@
 
 const store = require('../store')
 
-const successMessage = function (msgText) {
+const successMessage = msgText => {
   $('.message').text(msgText)
   $('.message').removeClass('failure')
   $('.message').addClass('success')
 }
 
-const failureMessage = function (msgText) {
+const failureMessage = msgText => {
   $('.message').text(msgText)
   $('.message').removeClass('success')
   $('.message').addClass('failure')
 }
-const captureColor = function (player) {
-  if (player === 'X') {
-    $(this).css('background-color', 'red')
-  } else if (player === 'O') {
-    $(this).css('background-color', 'blue')
-  }
-}
 
 // Game creation success and failure scripts
-const onCreateGameSuccess = function (responseData) {
+const onCreateGameSuccess = responseData => {
   successMessage('Game successfully created!')
   store.game = responseData.game
   console.log('Store is: ' + JSON.stringify(store.game))
 }
 
-const onCreateGameFailure = function () {
+const onCreateGameFailure = () => {
   failureMessage('Failed to create game!')
 }
 // ---
 
 // Game retrieval success and failure scripts
-const onGetGameSucccess = function (responseData) {
-  console.log(JSON.stringify(responseData))
+const onGetGamesSuccess = responseData => {
+  $('.game-count').text(responseData.games.length)
 }
 
-const onGetGameFailure = function () {
+const onGetGamesFailure = function () {
   console.log('Failed to retrieve game list.')
 }
 // ---
 
 // If the game is updated successfully, this script logs the data returned from the server to the console
-const onUpdateGameSuccess = function (responseData) {
+const onUpdateGamesSuccess = responseData => {
   console.log('Store is: ' + JSON.stringify(responseData))
 }
 
-const onUpdateGameFailure = function () {
+const onUpdateGamesFailure = () => {
   console.log('Game failed to update!')
 }
 // ---
 
 // Ends the current game
-const onEndGame = function (responseData) {
+const onEndGame = responseData => {
   console.log(JSON.stringify(responseData))
 }
 // ---
 
 module.exports = {
-  captureColor,
   onCreateGameSuccess,
   onCreateGameFailure,
-  onGetGameSucccess,
-  onGetGameFailure,
-  onUpdateGameSuccess,
-  onUpdateGameFailure,
+  onGetGamesSuccess,
+  onGetGamesFailure,
+  onUpdateGamesSuccess,
+  onUpdateGamesFailure,
   onEndGame
 }

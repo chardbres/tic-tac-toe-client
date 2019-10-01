@@ -18,6 +18,7 @@ const failureMessage = function (msgText) {
 // Sign-up success and failure notifications
 const onSignUpSuccess = function () {
   successMessage('Signed up successfully!')
+  $('.sign-up').trigger('reset')
 }
 
 const onSignUpFailure = function () {
@@ -31,10 +32,10 @@ const onSignInSuccess = function (responseData) {
   store.user = responseData.user
   console.log('store is: ', store)
   // When sign-in is successful, hide the sign-in and sign-up fields
-  $('.sign-in').fadeOut(fadeDuration)
-  $('.sign-up').fadeOut(fadeDuration)
-  $('.change-password').show()
-  $('.sign-out').show()
+  $('.sign-in').fadeOut(fadeDuration, function () { $('.change-password').show() })
+  $('.sign-up').fadeOut(fadeDuration, function () { $('.sign-out').show() })
+  $('.message').delay(1000).fadeOut(3 * fadeDuration)
+  $('.game-message').fadeIn(fadeDuration).text('Click Start Game button to play!')
 }
 
 const onSignInFailure = function () {
@@ -55,6 +56,7 @@ const onSignOutFailure = function () {
 // Password change success and failure notifications
 const onPasswordChangeSuccess = function () {
   successMessage('Password changed successfully!')
+  $('.change-password').trigger('reset')
 }
 
 const onPasswordChangeFailure = function () {

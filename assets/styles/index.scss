@@ -3,11 +3,12 @@
 $black: #000;
 $bright-red: #f00;
 $bright-green: #0f0;
+$start-button: #ff692e;
 $white: #fff;
 $banner-height: 8vh;
 $gameboard-height: 60vh;
 $gameboard-width: $gameboard-height;
-$gameboard-color: #9effe6;
+$gameboard-color: #18ffd9;
 $cell-color: #fefaf7;
 
 .banner {
@@ -40,7 +41,7 @@ $cell-color: #fefaf7;
   display: flex;
   height: $gameboard-height;
   justify-content: center;
-  margin: 5em auto 2em;
+  margin: 1em auto;
   width: $gameboard-width;
 }
 
@@ -57,47 +58,49 @@ $cell-color: #fefaf7;
 .box {
   align-items: center;
   background-color: $cell-color;
-  border: 4px solid $gameboard-color;
+  border: 8px solid $gameboard-color;
   display: flex;
   font-size: 4em;
   justify-content: center;
 }
 
 .game-buttons {
-  background-color: $bright-red;
-  border-radius: 15px;
+  background-color: $start-button;
+  border-radius: 10px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   margin: 0 auto;
   padding: 5px;
   width: 20vw;
+
+  button {
+    margin: 3px;
+  }
 }
 
-.game-buttons button {
-  margin: 3px;
+.game-counter {
+  display: flex;
+  flex-direction: row;
+
+  .game-count {
+    color: $start-button;
+    font-style: italic;
+    font-weight: bold;
+    margin: 0 5px;
+  }
+}
+
+.game-message {
+  display: flex;
+  justify-content: center;
+  margin: 2em auto;
 }
 
 .failure {
   color: $bright-red;
 }
 
-#one {
-  border-top-left-radius: 30px;
-}
-
-#three {
-  border-top-right-radius: 30px;
-}
-
-#seven {
-  border-bottom-left-radius: 30px;
-}
-
-#nine {
-  border-bottom-right-radius: 30px;
-}
-
 .success {
- color: $bright-green;
+  color: $bright-green;
 }

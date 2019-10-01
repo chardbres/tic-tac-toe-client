@@ -4,7 +4,7 @@ const config = require('../config.js')
 const store = require('../store.js')
 
 // Function creates a new game on the server
-const createGame = function (data) {
+const createGame = data => {
   return $.ajax({
     method: 'POST',
     url: config.apiUrl + '/games',
@@ -16,14 +16,13 @@ const createGame = function (data) {
 }
 
 // Function retrieves a list of all games on the server for the current user
-const getGame = function (formData) {
+const getGames = () => {
   return $.ajax({
     method: 'GET',
     url: config.apiUrl + '/games',
     headers: {
       Authorization: 'Token token=' + store.user.token
-    },
-    data: formData
+    }
   })
 }
 
@@ -48,7 +47,7 @@ const updateGame = function (cell, value) {
 }
 
 // Function ends the game, attached to a button or invoked when a player wins
-const endGame = function () {
+const endGame = () => {
   return $.ajax({
     method: 'PATCH',
     url: config.apiUrl + '/games/' + store.game.id,
@@ -65,7 +64,7 @@ const endGame = function () {
 
 module.exports = {
   createGame,
-  getGame,
+  getGames,
   updateGame,
   endGame
 }
