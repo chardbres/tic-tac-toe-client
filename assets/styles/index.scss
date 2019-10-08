@@ -56,7 +56,7 @@ $cell-color: #fefaf7;
   display: flex;
   height: $gameboard-height;
   justify-content: center;
-  margin: 1em auto;
+  margin: .5em auto;
   width: $gameboard-width;
 }
 
@@ -66,7 +66,7 @@ $cell-color: #fefaf7;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  margin: 0 auto;
+  margin: 1em auto;
   padding: 5px;
   width: 20vw;
 
@@ -82,6 +82,7 @@ $cell-color: #fefaf7;
 .game-counter {
   display: flex;
   flex-direction: row;
+  margin: 0 5px;
 
   .game-count {
     color: $start-button;
@@ -92,10 +93,9 @@ $cell-color: #fefaf7;
 }
 
 .game-message {
-  border: 1px solid $bright-green;
   display: flex;
   justify-content: center;
-  margin: 2em auto;
+  margin: 1em auto;
 }
 
 

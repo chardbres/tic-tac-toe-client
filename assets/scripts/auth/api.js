@@ -22,7 +22,8 @@ const signIn = function (formData) {
 }
 
 // Sign-out API
-const signOut = function () {
+const signOut = function (formData) {
+  console.log('made it here too')
   return $.ajax({
     method: 'DELETE',
     url: config.apiUrl + '/sign-out',

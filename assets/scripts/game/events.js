@@ -28,7 +28,6 @@ const activateBoard = () => {
     gameBoard[i] = ''
   }
   // ---
-  $('.game-message').text('Game Started! X begins, choose your opening wisely!')
   $('.box').addClass('clickable')
   onCreateGame()
 }
@@ -44,14 +43,14 @@ const switchPlayer = () => {
 
 // Function to claim the space
 // Breaks when I use the fat arrow notation for some reason!
-const claimSpace = function () {
-  const val = $(this).attr('id')
+const claimSpace = (event) => {
+  const cell = $(event.target).attr('id')
 
-  if (gameBoard[val - 1] === 'X' || gameBoard[val - 1] === 'O') {
+  if (gameBoard[cell] === 'X' || gameBoard[cell] === 'O') {
     $('.game-message').text('Cell is already claimed! Choose another!')
   } else {
-    gameBoard[val - 1] = currentPlayer
-    onUpdateGame(val, currentPlayer)
+    gameBoard[cell] = currentPlayer
+    onUpdateGame(cell, currentPlayer)
     // Checks game state for winner and switches player control if nobody has won
     checkGame()
     switchPlayer()
@@ -81,10 +80,12 @@ const checkGame = () => {
       winCondition = true
     } else if (winCondition === false && counter === 9) {
       onEndGame(currentPlayer, winCondition)
+      $('.clickable').removeClass('clickable')
     }
   }
   if (winCondition === true) {
     onEndGame(currentPlayer, winCondition)
+    $('.clickable').removeClass('clickable')
   }
 }
 

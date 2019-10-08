@@ -26,11 +26,12 @@ const onSignIn = function (event) {
     .then(ui.onSignInSuccess)
     // Retrieves and displays the total games played counter on successful sign-in
     .then(gameEvents.onGetGames)
+    // ---
     .catch(ui.onSignInFailure)
 }
 
 // Sign-out event
-const onSignOut = function (event) {
+const onSignOut = (event) => {
   event.preventDefault()
 
   const form = event.target
@@ -41,7 +42,7 @@ const onSignOut = function (event) {
 }
 
 // Password change event
-const onPasswordChange = function (event) {
+const onPasswordChange = event => {
   event.preventDefault()
 
   const form = event.target

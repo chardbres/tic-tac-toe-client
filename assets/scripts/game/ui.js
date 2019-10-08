@@ -2,26 +2,14 @@
 
 const store = require('../store')
 
-const successMessage = msgText => {
-  $('.message').text(msgText)
-  $('.message').removeClass('failure')
-  $('.message').addClass('success')
-}
-
-const failureMessage = msgText => {
-  $('.message').text(msgText)
-  $('.message').removeClass('success')
-  $('.message').addClass('failure')
-}
-
 // Game creation success and failure scripts
 const onCreateGameSuccess = responseData => {
-  successMessage('Game successfully created!')
+  $('.game-message').text('Game Started! X begins, choose your opening wisely!')
   store.game = responseData.game
 }
 
 const onCreateGameFailure = () => {
-  failureMessage('Failed to create game!')
+  $('.game-message').text('Failed to create game!')
 }
 // ---
 
@@ -37,7 +25,7 @@ const onGetGamesFailure = () => {
 
 // If the game is updated successfully, this script logs the data returned from the server to the console
 const onUpdateGameSuccess = function (cell, player) {
-  $('.game-message').text(player + ' has claimed cell ' + cell + '!')
+  $('.game-message').text(`${player} has claimed a cell!`)
   $('#' + cell).text(player)
 }
 
@@ -49,7 +37,7 @@ const onUpdateGameFailure = () => {
 // Ends the current game
 const onEndGame = (player, winCondition) => {
   if (winCondition === true) {
-    $('.game-message').text(player + ' has won the game! Click button to play again!')
+    $('.game-message').text(`${player} has won the game! Click button to play again!`)
   } else {
     $('.game-message').text("It's a draw! Click button to play again!")
   }

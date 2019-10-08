@@ -2,33 +2,34 @@
 
 const store = require('../store')
 const fadeDuration = 800
-
-const successMessage = function (msgText) {
-  $('.message').text(msgText)
-  $('.message').removeClass('failure')
-  $('.message').addClass('success')
-}
-
-const failureMessage = function (msgText) {
-  $('.message').text(msgText)
-  $('.message').removeClass('success')
-  $('.message').addClass('failure')
-}
+//
+// const successMessage = function (msgText) {
+//   $('.message').text(msgText)
+//   $('.message').removeClass('failure')
+//   $('.message').addClass('success')
+// }
+//
+// const failureMessage = function (msgText) {
+//   $('.message').text(msgText)
+//   $('.message').removeClass('success')
+//   $('.message').addClass('failure')
+// }
 
 // Sign-up success and failure notifications
 const onSignUpSuccess = function () {
-  successMessage('Signed up successfully!')
+  $('.message').text('Signed up successfully!')
   $('.sign-up').trigger('reset')
 }
 
 const onSignUpFailure = function () {
-  failureMessage('Failure to sign up!')
+  $('.message').text('Failure to sign up!')
 }
 // ---
 
 // Sign-in success and failure notifications
 const onSignInSuccess = function (responseData) {
-  successMessage('Signed in successfully!')
+  $('.message').text('Signed in successfully!')
+  $('.sign-in').trigger('reset')
   store.user = responseData.user
   // When sign-in is successful, hide the sign-in and sign-up fields
   $('.sign-in').fadeOut(fadeDuration, function () { $('.change-password').show() })
@@ -38,28 +39,37 @@ const onSignInSuccess = function (responseData) {
 }
 
 const onSignInFailure = function () {
-  failureMessage('Sign-in failed!')
+  ('.message').text('Sign-in failed!')
 }
 // ---
 
 // Sign-out success and failure notifications
 const onSignOutSuccess = function () {
-  successMessage('Signed out successfully!')
+  $('.box').text('')
+  $('.clickable').removeClass('clickable')
+  $('.game-message').text('')
+  $('.message').fadeIn(fadeDuration)
+  $('.message').text('Signed out successfully!')
+  $('.sign-out').hide()
+  $('.change-password').hide()
+  $('.sign-up').fadeIn(fadeDuration)
+  $('.sign-in').fadeIn(fadeDuration)
+  $('.clickable').removeClass('.clickable')
 }
 
 const onSignOutFailure = function () {
-  failureMessage('Sign-out failed!')
+  ('.message').text('Sign-out failed!')
 }
 // ---
 
 // Password change success and failure notifications
 const onPasswordChangeSuccess = function () {
-  successMessage('Password changed successfully!')
+  $('.message').text('Password changed successfully!')
   $('.change-password').trigger('reset')
 }
 
 const onPasswordChangeFailure = function () {
-  failureMessage('Password change failed!')
+  $('.message').text('Password change failed!')
 }
 // ---
 
