@@ -30,5 +30,5 @@ UNSOLVED PROBLEMS:
 3. Would like to add more granularity to the game counter, so that the user can retrieve all wins/losses/draws/discarded games in their history.
 4. Would like to add more animations and interactivity to the game board.
 
-Link to wireframe: './gameBoard_wireframe.png'
+Link to wireframe: './gameBoard_wireframe.png'  
 Link to user stories: './user-stories.md'
