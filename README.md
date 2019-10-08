@@ -7,6 +7,7 @@ TECHNOLOGIES USED:
 4. cURL to test CRUD processes with the API shared by the server endpoint.
 5. AJAX to handle API calls to the server endpoint when initiated by DOM manipulations.
 6. Git/GitHub for project version control.
+7. Markdown for all documentation files (like this README).
 
 
 PLANNING AND HISTORY:
@@ -19,6 +20,7 @@ Project planning began with a rough outline of which tasks to work on in order, 
 4. (09/27/2019) - Creation of functions to switch the current player, claim an open space or disallow claiming of an occupied space, and to check the game state on each turn against a list of win conditions or return a draw if no winners.
 5. (09/29/2019) - First successful AJAX API call to create a new game on the development server. Creation of AJAX cript to update the current game state on the server on each cell click, and cURL scripts to create and return games on the development server.
 6. (09/30/2019) - Completed script to end the current game by win, draw, or by initializing a new game without completing a game. Finished all remaining scripts to prevent game interactivity before sign-in, and clearing of authorization form fields after submission. Added a counter that retrieves the number of games played by the current user on the development server. Cleaned up and alphabetized the codebase and added final stylings to the SPA.
+7. (10/08/2019) - Revised and completed all remaining game and authorization events. Fixed bug that was refereshing the page on sign-out, and moved as much UI-related functionality out of the game/events.js file into the game/ui.js file. Finally, fixed issue wherein the boxes were able to be clicked and updated after games had ended.
 
 Many problems were encountered during development of this project. In general, these were related to issues in linking the many different .js files, as many times there could be slight misspellings in the function names between all of the required files. In addition, many errors occurred in during the creation of the functions to start, stop, and end each game, and in the checking of the game state against win conditions. For debugging all of these issues, it was immensely helpful to serve the SPA locally and update it in real-time after every script change, so that changes in behavior were immediately obvious. In general, it was found that the most successful way to resolve any bugs was to observe the location of the error in the browser console, and then track through all of that function’s linkages until the issue was discovered and fixed.
 
