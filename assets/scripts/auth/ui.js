@@ -29,6 +29,7 @@ const onSignUpFailure = () => {
 
 // Sign-in success and failure notifications
 const onSignInSuccess = responseData => {
+  $('.game-start').show()
   $('.message').text('Signed in successfully!')
   $('.sign-in').trigger('reset')
   store.user = responseData.user
@@ -57,6 +58,7 @@ const onSignOutSuccess = () => {
   $('.sign-in').fadeIn(fadeDuration)
   $('.clickable').removeClass('.clickable')
   $('.game-count').text('')
+  $('.game-start').hide()
 }
 
 const onSignOutFailure = () => {

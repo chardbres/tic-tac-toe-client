@@ -9,9 +9,10 @@ const gameEvents = require('./game/events.js')
 const authEvents = require('./auth/events.js')
 
 $(() => {
-  // Initialize the page with the change-password and sign-out authorization fields hidden
+  // Initialize the page with the start game buttom and change-password/sign-out authorization fields hidden
   $('.change-password').hide()
   $('.sign-out').hide()
+  $('.game-start').hide()
   // Gameplay events
   $('.game-start').on('click', gameEvents.activateBoard)
   $('.game-board').on('click', '.clickable', gameEvents.claimSpace)
