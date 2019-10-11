@@ -56,6 +56,7 @@ const onSignOutSuccess = function () {
   $('.sign-up').fadeIn(fadeDuration)
   $('.sign-in').fadeIn(fadeDuration)
   $('.clickable').removeClass('.clickable')
+  $('.game-count').text('')
 }
 
 const onSignOutFailure = function () {
