@@ -51,7 +51,6 @@ const onSignOutSuccess = () => {
   $('.game-message').text('')
   $('.message').fadeIn(fadeDuration)
   $('.message').text('Signed out successfully!')
-  $('.message').delay(3000).text('Sign in to play!')
   $('.sign-out').hide()
   $('.change-password').hide()
   $('.sign-up').fadeIn(fadeDuration)
