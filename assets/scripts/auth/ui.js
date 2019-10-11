@@ -16,19 +16,19 @@ const fadeDuration = 800
 // }
 
 // Sign-up success and failure notifications
-const onSignUpSuccess = function () {
+const onSignUpSuccess = () => {
   $('.message').text('Signed up successfully!')
   $('.sign-up').trigger('reset')
 }
 
-const onSignUpFailure = function () {
+const onSignUpFailure = () => {
   $('.message').text('Failure to sign up!')
   $('.sign-up').trigger('reset')
 }
 // ---
 
 // Sign-in success and failure notifications
-const onSignInSuccess = function (responseData) {
+const onSignInSuccess = responseData => {
   $('.message').text('Signed in successfully!')
   $('.sign-in').trigger('reset')
   store.user = responseData.user
@@ -39,18 +39,19 @@ const onSignInSuccess = function (responseData) {
   $('.game-message').fadeIn(fadeDuration).text('Click Start Game button to play!')
 }
 
-const onSignInFailure = function () {
+const onSignInFailure = () => {
   ('.message').text('Sign-in failed!')
 }
 // ---
 
 // Sign-out success and failure notifications
-const onSignOutSuccess = function () {
+const onSignOutSuccess = () => {
   $('.box').text('')
   $('.clickable').removeClass('clickable')
   $('.game-message').text('')
   $('.message').fadeIn(fadeDuration)
   $('.message').text('Signed out successfully!')
+  $('.message').delay(3000).text('Sign in to play!')
   $('.sign-out').hide()
   $('.change-password').hide()
   $('.sign-up').fadeIn(fadeDuration)
@@ -59,19 +60,19 @@ const onSignOutSuccess = function () {
   $('.game-count').text('')
 }
 
-const onSignOutFailure = function () {
+const onSignOutFailure = () => {
   ('.message').text('Sign-out failed!')
 }
 // ---
 
 // Password change success and failure notifications
-const onPasswordChangeSuccess = function () {
+const onPasswordChangeSuccess = () => {
   $('.message').fadeIn(fadeDuration).text('Password changed successfully!')
   $('.change-password').trigger('reset')
   $('.message').delay(1000).fadeOut(3 * fadeDuration)
 }
 
-const onPasswordChangeFailure = function () {
+const onPasswordChangeFailure = () => {
   $('.message').text('Password change failed!')
   $('.change-password').trigger('reset')
 }

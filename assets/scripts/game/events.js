@@ -43,7 +43,7 @@ const switchPlayer = () => {
 
 // Function to claim the space
 // Breaks when I use the fat arrow notation for some reason!
-const claimSpace = (event) => {
+const claimSpace = event => {
   const cell = $(event.target).attr('id')
 
   if (gameBoard[cell] === 'X' || gameBoard[cell] === 'O') {

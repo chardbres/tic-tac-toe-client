@@ -24,7 +24,7 @@ const onGetGamesFailure = () => {
 // ---
 
 // If the game is updated successfully, this script logs the data returned from the server to the console
-const onUpdateGameSuccess = function (cell, player) {
+const onUpdateGameSuccess = (cell, player) => {
   $('.game-message').text(`${player} has claimed a cell!`)
   $('#' + cell).text(player)
 }

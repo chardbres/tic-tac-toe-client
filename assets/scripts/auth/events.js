@@ -6,7 +6,7 @@ const api = require('./api.js')
 const ui = require('./ui.js')
 
 // Sign-up event
-const onSignUp = function (event) {
+const onSignUp = event => {
   event.preventDefault()
 
   const form = event.target
@@ -17,7 +17,7 @@ const onSignUp = function (event) {
 }
 
 // Sign-in event
-const onSignIn = function (event) {
+const onSignIn = event => {
   event.preventDefault()
 
   const form = event.target
@@ -31,7 +31,7 @@ const onSignIn = function (event) {
 }
 
 // Sign-out event
-const onSignOut = (event) => {
+const onSignOut = event => {
   event.preventDefault()
 
   const form = event.target

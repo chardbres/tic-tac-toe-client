@@ -27,7 +27,7 @@ const getGames = () => {
 }
 
 // Function updates the current game on the server after each play
-const updateGame = function (cell, value) {
+const updateGame = (cell, value) => {
   return $.ajax({
     method: 'PATCH',
     url: config.apiUrl + '/games/' + store.game.id,
