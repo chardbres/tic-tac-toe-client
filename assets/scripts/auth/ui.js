@@ -23,6 +23,7 @@ const onSignUpSuccess = function () {
 
 const onSignUpFailure = function () {
   $('.message').text('Failure to sign up!')
+  $('.sign-up').trigger('reset')
 }
 // ---
 
@@ -64,12 +65,14 @@ const onSignOutFailure = function () {
 
 // Password change success and failure notifications
 const onPasswordChangeSuccess = function () {
-  $('.message').text('Password changed successfully!')
+  $('.message').fadeIn(fadeDuration).text('Password changed successfully!')
   $('.change-password').trigger('reset')
+  $('.message').delay(1000).fadeOut(3 * fadeDuration)
 }
 
 const onPasswordChangeFailure = function () {
   $('.message').text('Password change failed!')
+  $('.change-password').trigger('reset')
 }
 // ---
 
